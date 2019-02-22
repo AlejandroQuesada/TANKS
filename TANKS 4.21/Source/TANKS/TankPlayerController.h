@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Tank.h"
+#include "Engine/Classes/Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
@@ -17,17 +18,17 @@ class TANKS_API ATankPlayerController : public APlayerController
 	
 public:
 	ATank* GetControlledTank() const;
-	
 	virtual void BeginPlay() override;
-	
 	virtual void Tick(float DeltaTime) override;
-
 	void AimToCrosshair();
-	bool GetSightRayHitLoction(FVector & HitLocation) const;
+	bool GetSightRayHitLocation(FVector & HitLocation) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector & OutHitLocation) const;
 
 private:
 	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5;
 	UPROPERTY(EditAnywhere)
 	float CrosshairYLocation = 0.333333333;
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000 ;
 };
