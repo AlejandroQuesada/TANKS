@@ -30,11 +30,17 @@ ATank* ATankPlayerController::GetControlledTank() const {
 void ATankPlayerController::AimToCrosshair(){
 	FVector HitLocation;
 	if (GetSightRayHitLoction(HitLocation)) {
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString())
+		
 	}
 }
 
 bool ATankPlayerController::GetSightRayHitLoction(FVector &OutHitLocation) const {
-	return true;
-	//Find first item on the direction of the HitLocation
+	int32 ViewportSizeX, ViewportSizeY;
+	FVector WorldDirection;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+ 	FVector2D ScreenLocation = FVector2D(ViewportSizeX*CrosshairXLocation, ViewportSizeY*CrosshairYLocation);
+	
+	if(DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y,FVector(), WorldDirection))
+		UE_LOG(LogTemp, Warning, TEXT("WorldDirection: %s"), *WorldDirection.ToString())
+	 return true;
 }
