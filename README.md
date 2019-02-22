@@ -1,2 +1,2 @@
 # TANKS
-* Hello
+* A Battle-Tank-like game
