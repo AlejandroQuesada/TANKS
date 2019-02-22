@@ -3,9 +3,7 @@
 #include "TankPlayerController.h"
 
 
-ATank* ATankPlayerController::GetControlledTank() const {
-	return Cast<ATank>(GetPawn());
-}
+
 
 void ATankPlayerController::BeginPlay(){
 	Super::BeginPlay();
@@ -22,7 +20,21 @@ void ATankPlayerController::BeginPlay(){
 
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
+	AimToCrosshair();
 }
 
-void ATankPlayerController::AimToCrosshair() {
+ATank* ATankPlayerController::GetControlledTank() const {
+	return Cast<ATank>(GetPawn());
+}
+
+void ATankPlayerController::AimToCrosshair(){
+	FVector HitLocation;
+	if (GetSightRayHitLoction(HitLocation)) {
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString())
+	}
+}
+
+bool ATankPlayerController::GetSightRayHitLoction(FVector &OutHitLocation) const {
+	return true;
+	//Find first item on the direction of the HitLocation
 }
